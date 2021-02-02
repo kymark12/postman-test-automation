@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "dad91267-39c2-4265-8a85-12c8235256bb",
+		"name": "Kumu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/user/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is successful!\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"response must be valid and have a body\", function () {\r",
+							"     // assert that the status code is 200\r",
+							"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants\r",
+							"     // assert that the response has a valid JSON body\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed\r",
+							"});\r",
+							"var jsonData = JSON.parse(responseBody);\r",
+							"//Assert the token and guid values on the response body\r",
+							"pm.test(\"response should be okay to process\", function () { \r",
+							"    pm.response.to.not.be.error;\r",
+							"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+							"    pm.response.to.have.jsonBody(\"data\");\r",
+							"    pm.environment.set(\"token\", jsonData.data.token);\r",
+							"    pm.environment.set(\"user-id\", jsonData.data.guid);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Device-Type",
+						"value": "ios",
+						"type": "text"
+					},
+					{
+						"key": "Device-Id",
+						"value": "BF96B46970CB42CD970C9C1879ABA65E",
+						"type": "text"
+					},
+					{
+						"key": "Version-Code",
+						"value": "871",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "dev-api.kumuapi.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "device-id",
+						"value": "BF96B46970CB42CD970C9C1879ABA65E",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "device-type",
+						"value": "ios",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Version-Code",
+						"value": "7",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Cache-Control",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "x-emb-st",
+						"value": "1597833023434",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "accept-language",
+						"value": "en-PH;q=1.0",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "user-agent",
+						"value": "kumu/6.1.0 (im.kumu.ph; build:757; iOS 13.5.1) Alamofire/4.8.2",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "x-emb-id",
+						"value": "3BA7F76A5BC748FF9AF06B501F0E0976",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-kumu-Token",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-kumu-UserId",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country_code\":\"+63\",\r\n    \"verification_code\":\"840377\",\r\n    \"cellphone\":\"00000000667\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/user/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
